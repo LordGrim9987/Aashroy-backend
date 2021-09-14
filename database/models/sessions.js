@@ -9,6 +9,10 @@ var session = new Schema({
     type: String,
     required: true,
   },
+  roll: {
+    type: String,
+    required: true,
+  },
 });
 
 const SESSIONS = mongoose.model("session", session);

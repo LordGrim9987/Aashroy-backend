@@ -47,28 +47,24 @@ const authenticateToken = async (req, res, next) => {
             refresh_token: bearerRefreshToken,
           });
           if (!session) {
+            //refresh token not available
             return res.sendStatus(404);
           }
-          // create new access_token
+          // refresh token available create new access_token
           const access_token = await generateJWT({
-            _id: session.user_id,
+            user_id: session.user_id,
+            roll: session.roll,
           });
           req.access_token = access_token;
-          req.body.authData = { user_id: session.user_id };
+          req.authData = { user_id: session.user_id, roll: session.roll };
           next();
         } else {
-          req.body.authData = authData;
+          req.authData = authData;
           next();
         }
       }
     );
   } else {
-    console.log("Request Blocked -> IP: ", req.connection.remoteAddress);
-    console.log(
-      "Request Blocked -> IP: ",
-      req.headers["x-forwarded-for"],
-      " (if server behind proxy)"
-    );
     res.sendStatus(403);
   }
 };

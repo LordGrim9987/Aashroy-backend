@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { OAuth2Client } = require("google-auth-library");
 const GENERAL_USER = require("../../database/models/general_user");
-const { generateJWT, authenticateToken } = require("../../utils/Authorize");
+const { generateJWT } = require("../../utils/Authorize");
 const crypto = require("crypto");
 const SESSIONS = require("../../database/models/sessions");
 
@@ -39,6 +39,7 @@ router.post("/", (req, res) => {
           await SESSIONS.create({
             user_id: newUser._id,
             refresh_token,
+            roll: "general_user",
           });
 
           return res
@@ -53,7 +54,11 @@ router.post("/", (req, res) => {
         //create a new refresh token by overriding the old one if exist or creating if not
         await SESSIONS.updateOne(
           { user_id: user._id },
-          { user_id: user._id, refresh_token: refresh_token },
+          {
+            user_id: user._id,
+            refresh_token: refresh_token,
+            roll: "general_user",
+          },
           { upsert: true }
         );
 
@@ -64,11 +69,6 @@ router.post("/", (req, res) => {
         res.status(500).json({});
       }
     });
-});
-
-router.post("/erase", async (req, res) => {
-  await SESSIONS.deleteMany({});
-  res.send("done");
 });
 
 module.exports = router;
