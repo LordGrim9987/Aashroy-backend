@@ -4,6 +4,11 @@ var general_user = new Schema({
   email: {
     type: String,
     required: true,
+    validate: {
+      validator: (e) => {
+        return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(e);
+      },
+    },
   },
   name: {
     type: String,
@@ -15,13 +20,6 @@ var general_user = new Schema({
   contribution_points: {
     type: Schema.Types.Mixed,
   },
-  reported_homeless: [
-    {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "homeless",
-    },
-  ],
 });
 
 const GENERAL_USER = mongoose.model("general_user", general_user);
