@@ -4,7 +4,7 @@ const GENERAL_USER = require("../../database/models/general_user");
 const { generateJWT } = require("../../utils/Authorize");
 const crypto = require("crypto");
 const SESSIONS = require("../../database/models/sessions");
-const Rolls = require("../../database/rolls");
+const Roles = require("../../database/roles");
 
 const OAuth2ClientEndPoint =
   "383681632751-r91i8q9ca65mlqtv9grtfirs7k8lfjjo.apps.googleusercontent.com";
@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
           await SESSIONS.create({
             user_id: newUser._id,
             refresh_token,
-            roll: Rolls.GENERAL_USER,
+            role: Roles.GENERAL_USER,
           });
 
           return res
@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
           {
             user_id: user._id,
             refresh_token: refresh_token,
-            roll: Rolls.GENERAL_USER,
+            role: Roles.GENERAL_USER,
           },
           { upsert: true }
         );

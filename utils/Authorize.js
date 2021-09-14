@@ -53,10 +53,10 @@ const authenticateToken = async (req, res, next) => {
           // refresh token available create new access_token
           const access_token = await generateJWT({
             user_id: session.user_id,
-            roll: session.roll,
+            role: session.role,
           });
           req.access_token = access_token;
-          req.authData = { user_id: session.user_id, roll: session.roll };
+          req.authData = { user_id: session.user_id, role: session.role };
           next();
         } else {
           req.authData = authData;

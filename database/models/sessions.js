@@ -9,7 +9,7 @@ var session = new Schema({
     type: String,
     required: true,
   },
-  roll: {
+  role: {
     type: String,
     required: true,
   },
