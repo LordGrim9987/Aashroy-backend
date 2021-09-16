@@ -25,7 +25,16 @@ var ngo = new Schema({
     type: locationSchema,
     required: true,
   },
-  media_urls: [{ type: String, required: true }],
+  media_urls: [
+    {
+      url: {
+        type: String,
+      },
+      media_type: {
+        type: String,
+      },
+    },
+  ],
   members: [{ type: ngoMembersSchema }],
   about: {
     type: String,

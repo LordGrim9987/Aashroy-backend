@@ -13,7 +13,16 @@ var ngo_work_detail = new Schema({
     type: String,
     required: true,
   },
-  media_urls: [{ type: String }],
+  media_urls: [
+    {
+      url: {
+        type: String,
+      },
+      media_type: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const NGO_WORK_DETAILS = mongoose.model("ngo_work_details", ngo_work_detail);
