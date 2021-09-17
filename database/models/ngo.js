@@ -58,6 +58,26 @@ var ngo = new Schema({
       },
     },
   },
+  website: {
+    type: String,
+    validate: {
+      validator: (url) => {
+        var res = url.match(
+          /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+        );
+        if (res == null) return false;
+        return true;
+      },
+    },
+  },
+  is_not_receiving_donations: {
+    type: Boolean,
+    default: true,
+  },
+  is_inactive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const NGO = mongoose.model("ngo", ngo);

@@ -5,12 +5,12 @@ var ngoMembersSchema = new Schema({
     type: String,
     required: true,
   },
-  roll: {
+  role: {
     type: String,
     required: true,
   },
-  experience: {
-    type: Number,
+  joined_at: {
+    type: String,
   },
   profile_pic: {
     type: String,
