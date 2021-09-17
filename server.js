@@ -27,6 +27,14 @@ app.use("/", express.static("public"));
 //routes
 app.use("/auth/generaluser/", require("./routes/auth/generalUserAuth"));
 app.use("/auth/ngo/", require("./routes/auth/ngoAuth"));
+
+// general user routes
+app.use(
+  "/general-user/report-homeless",
+  require("./routes/general-user/reportHomeless")
+);
+app.use("/general-user/donation", require("./routes/general-user/donation"));
+
 //
 
 const PORT = process.env.PORT || 5000;
