@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json({ limit: "20mb" }));
 app.use(cors());
+
 const cookieParser = require("cookie-parser");
 require("./database/dbConnect").connect();
 require("./database/blobStore").config();
