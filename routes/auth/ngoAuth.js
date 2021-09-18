@@ -38,7 +38,10 @@ router.post("/signin", async (req, res) => {
       return res.sendStatus(404);
     }
     //create new refreshed token and access_token
-    const access_token = await generateJWT({ user_id: ngo._id });
+    const access_token = await generateJWT({
+      user_id: ngo._id,
+      role: Roles.NGO,
+    });
     const refresh_token = crypto.randomBytes(64).toString("hex");
 
     await SESSIONS.updateOne(

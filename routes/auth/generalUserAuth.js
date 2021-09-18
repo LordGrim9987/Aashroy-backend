@@ -34,6 +34,7 @@ router.post("/", (req, res) => {
           });
           const access_token = await generateJWT({
             user_id: newUser._id,
+            role: Roles.GENERAL_USER,
           });
           //create a new refresh token and send it
           const refresh_token = crypto.randomBytes(64).toString("hex");
@@ -50,6 +51,7 @@ router.post("/", (req, res) => {
         //user already exist
         const access_token = await generateJWT({
           user_id: user._id,
+          role: Roles.GENERAL_USER,
         });
         const refresh_token = crypto.randomBytes(64).toString("hex");
         //create a new refresh token by overriding the old one if exist or creating if not
