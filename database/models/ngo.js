@@ -48,15 +48,11 @@ var ngo = new Schema({
         return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(e);
       },
     },
+    unique: true,
   },
   phone: {
     type: Number,
     required: true,
-    validate: {
-      validator: (n) => {
-        return /d{10}/.test(n);
-      },
-    },
   },
   website: {
     type: String,
@@ -77,6 +73,10 @@ var ngo = new Schema({
   is_inactive: {
     type: Boolean,
     default: false,
+  },
+  password: {
+    type: String,
+    required: true,
   },
 });
 
