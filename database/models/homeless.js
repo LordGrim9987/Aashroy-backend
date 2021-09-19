@@ -18,8 +18,12 @@ var homeless = new Schema(
     },
     media_url: [
       {
-        type: String,
-        required: true,
+        url: {
+          type: String,
+        },
+        media_type: {
+          type: String,
+        },
       },
     ],
   },

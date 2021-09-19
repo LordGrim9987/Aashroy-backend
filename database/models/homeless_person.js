@@ -14,7 +14,12 @@ var homeless_person = new Schema({
     required: true,
   },
   media_url: {
-    type: String,
+    url: {
+      type: String,
+    },
+    media_type: {
+      type: String,
+    },
   },
   homeless: {
     type: Schema.Types.ObjectId,
