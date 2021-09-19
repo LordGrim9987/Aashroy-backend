@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { OAuth2Client } = require("google-auth-library");
 const GENERAL_USER = require("../../database/models/general_user");
-const { generateJWT } = require("../../utils/Authorize");
+const { generateJWT, authenticateToken } = require("../../utils/Authorize");
 const crypto = require("crypto");
 const SESSIONS = require("../../database/models/sessions");
 const Roles = require("../../database/roles");
@@ -34,6 +34,7 @@ router.post("/", (req, res) => {
           });
           const access_token = await generateJWT({
             user_id: newUser._id,
+            role: Roles.GENERAL_USER,
           });
           //create a new refresh token and send it
           const refresh_token = crypto.randomBytes(64).toString("hex");
@@ -50,6 +51,7 @@ router.post("/", (req, res) => {
         //user already exist
         const access_token = await generateJWT({
           user_id: user._id,
+          role: Roles.GENERAL_USER,
         });
         const refresh_token = crypto.randomBytes(64).toString("hex");
         //create a new refresh token by overriding the old one if exist or creating if not
@@ -70,6 +72,19 @@ router.post("/", (req, res) => {
         res.status(500).json({});
       }
     });
+});
+
+router.post("/signout", authenticateToken, async (req, res) => {
+  if (req.authData.role != Roles.GENERAL_USER) {
+    return res.sendStatus(403);
+  }
+  try {
+    const { refresh_token } = req.body;
+    await SESSIONS.deleteOne({ refresh_token });
+    res.status(200).json({});
+  } catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;

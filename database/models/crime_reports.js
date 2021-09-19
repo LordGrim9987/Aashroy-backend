@@ -15,8 +15,12 @@ var crime_reports = new Schema({
   },
   media_urls: [
     {
-      type: String,
-      required: true,
+      url: {
+        type: String,
+      },
+      media_type: {
+        type: String,
+      },
     },
   ],
 });

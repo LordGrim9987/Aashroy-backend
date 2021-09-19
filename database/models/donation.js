@@ -29,10 +29,14 @@ var donation = new Schema(
       type: String,
       required: true,
     },
-    media_url: [
+    media_urls: [
       {
-        type: String,
-        required: true,
+        url: {
+          type: String,
+        },
+        media_type: {
+          type: String,
+        },
       },
     ],
     dimensions: [{ type: Number, required: true }],

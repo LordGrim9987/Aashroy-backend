@@ -16,10 +16,12 @@ var homeless = new Schema(
       required: true,
       ref: "general_user",
     },
-    media_url: [{
-      type: String,
-      required: true,
-    }],
+    media_url: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
   },
   { timestamps: true }
 );
