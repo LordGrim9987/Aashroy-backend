@@ -30,6 +30,7 @@ app.use("/auth/generaluser/", require("./routes/auth/generalUserAuth"));
 app.use("/auth/ngo/", require("./routes/auth/ngoAuth"));
 
 // general user routes
+app.use("/general-user", require("./routes/general-user/generalUser"));
 app.use(
   "/general-user/report-homeless",
   require("./routes/general-user/reportHomeless")
