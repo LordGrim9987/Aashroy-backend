@@ -37,6 +37,9 @@ app.use(
 );
 app.use("/general-user/donation", require("./routes/general-user/donation"));
 
+// crime report routes
+app.use("/crime-report", require("./routes/crime-report/crimeReport"));
+
 //
 
 const PORT = process.env.PORT || 5000;
