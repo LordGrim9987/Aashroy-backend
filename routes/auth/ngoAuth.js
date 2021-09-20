@@ -70,16 +70,14 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-router.post("/signout", authenticateToken, async (req, res) => {
-  if (req.authData.role != Roles.NGO) {
-    return res.sendStatus(403);
-  }
+router.post("/signout", async (req, res) => {
   //delete the refresh token
   try {
     const { refresh_token } = req.body;
     await SESSIONS.deleteOne({ refresh_token });
-    res.status(200).json({});
+    res.status(200).json({ success: true });
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });

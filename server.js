@@ -28,6 +28,7 @@ app.use("/", express.static("public"));
 app.use("/auth/generaluser/", require("./routes/auth/generalUserAuth"));
 app.use("/auth/ngo/", require("./routes/auth/ngoAuth"));
 app.use("/ngo/details/", require("./routes/ngo/ngoDetails"));
+app.use("/ngo/public/", require("./routes/ngo/ngoPublic"));
 //
 
 const PORT = process.env.PORT || 5000;
