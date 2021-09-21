@@ -3,3 +3,16 @@ GET http://localhost:5000/ngo/public/all
 ###
 
 GET http://localhost:5000/ngo/public/get/61463268ae141aef08062d5b
+
+###
+
+POST http://localhost:5000/ngo/public/nearest
+Content-Type: application/json     
+
+{
+    "diameter": 13,
+    "geo_location":{
+        "latitude":26.768617,
+        "longitude":94.2052228
+    }
+}

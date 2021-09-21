@@ -1,6 +1,7 @@
 function nullUndefCheck(vars) {
-  for (const item of Object.entries(vars)) {
-    if (!item) return false;
+  return true;
+  for (const item of Object.keys(vars)) {
+    if (!vars.item || vars.item == undefined) return false;
   }
   return true;
 }
