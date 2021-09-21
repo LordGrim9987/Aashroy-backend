@@ -109,7 +109,6 @@ router.post("/addnewphoto", authenticateToken, async (req, res) => {
   if (!nullUndefCheck({ image })) return res.sendStatus(400);
 
   try {
-    console.log(user_id, image);
     const { secure_url } = await uploadImageAsync({
       upload_path: "ngo/",
       file: image,

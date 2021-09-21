@@ -7,6 +7,7 @@ router.get("/get/:id", async (req, res) => {
 
   try {
     const ngo = await NGO.findById({ _id: id });
+
     if (!ngo) {
       return res.sendStatus(404);
     }
