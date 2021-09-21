@@ -1,0 +1,14 @@
+POST http://localhost:5000/crime-report
+Content-Type: application/json
+
+{
+    "type":"Child Abuse",
+    "typeDescription":"yo2",
+    "geoLocation":{
+        "latitude":50,
+        "longitude":45,
+        "address":"hoi aru korobat"
+    },
+    "briefReport":".......hahahaha......",
+    "media":[]
+}
