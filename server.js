@@ -40,6 +40,9 @@ app.use("/general-user/donation", require("./routes/general-user/donation"));
 // crime report routes
 app.use("/crime-report", require("./routes/crime-report/crimeReport"));
 
+// ngo routes
+app.use("/ngo/details/", require("./routes/ngo/ngoDetails"));
+app.use("/ngo/public/", require("./routes/ngo/ngoPublic"));
 //
 
 const PORT = process.env.PORT || 5000;

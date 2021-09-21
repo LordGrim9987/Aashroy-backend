@@ -10,6 +10,7 @@
   "author": "Aurin",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cloudinary": "^1.26.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

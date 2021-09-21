@@ -6,23 +6,29 @@ const router = require("express").Router();
 const crypto = require("crypto");
 const Roles = require("../../database/roles");
 const SESSIONS = require("../../database/models/sessions");
+const { generateHashAsync, compareWithHashAsync } = require("../../utils/hash");
 
-router.post("/signup", async (req, res) => {
-  const { name, email, phone, about, location, password } = req.body;
+router.post("/register", async (req, res) => {
+  const { name, email, phone, about, location, password, website } = req.body;
   if (!nullUndefCheck({ name, email, phone, about, location })) {
+    console.log("yooo");
     return res.sendStatus(403);
   }
   try {
+    const hashPassword = await generateHashAsync(password);
     const ngo = await NGO.create({
       name,
       email,
       phone,
       about,
-      password,
+      password: hashPassword,
       geo_location: location,
+      website: website || "",
     });
-    res.status(200).json({});
+    console.log(ngo);
+    res.status(200).json({ success: true, msg: "Registered Successfully" });
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
@@ -31,10 +37,13 @@ router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   try {
     const ngo = await NGO.findOne(
-      { email, password },
-      { name: 1, _id: 1, media_urls: 1 }
+      { email },
+      { name: 1, _id: 1, media_urls: 1, password: 1 }
     );
     if (!ngo) {
+      return res.sendStatus(404);
+    }
+    if (!(await compareWithHashAsync(password, ngo.password))) {
       return res.sendStatus(404);
     }
     //create new refreshed token and access_token
@@ -56,20 +65,19 @@ router.post("/signin", async (req, res) => {
 
     return res.status(200).json({ access_token, ngoData: ngo, refresh_token });
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
 
-router.post("/signout", authenticateToken, async (req, res) => {
-  if (req.authData.role != Roles.NGO) {
-    return res.sendStatus(403);
-  }
+router.post("/signout", async (req, res) => {
   //delete the refresh token
   try {
     const { refresh_token } = req.body;
     await SESSIONS.deleteOne({ refresh_token });
-    res.status(200).json({});
+    res.status(200).json({ success: true });
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });
