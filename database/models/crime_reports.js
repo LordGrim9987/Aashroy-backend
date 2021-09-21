@@ -14,6 +14,10 @@ var crime_reports = new Schema(
       type: locationSchema,
       required: true,
     },
+    reverse_geocoding_address: {
+      type: String,
+      default: "",
+    },
     brief_report: {
       type: String,
     },

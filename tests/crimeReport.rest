@@ -9,6 +9,7 @@ Content-Type: application/json
         "longitude":45,
         "address":"hoi aru korobat"
     },
+    "reverseGeocodingAddress":"",
     "briefReport":".......hahahaha......",
     "media":[]
 }

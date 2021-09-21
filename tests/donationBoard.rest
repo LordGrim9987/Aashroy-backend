@@ -1,0 +1,5 @@
+GET http://localhost:5000/donation-board
+Content-Type: application/json
+
+###
+GET https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=pk.eyJ1IjoiZGV2emFyZCIsImEiOiJja3R1YnBibW4wOTF2MzJtbXZteHR4amJvIn0.OXafCP6j-wbwBcmEMCXd4w

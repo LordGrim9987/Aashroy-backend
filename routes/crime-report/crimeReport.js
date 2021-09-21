@@ -16,8 +16,16 @@ router.post(
   body("geoLocation").isObject(),
   body("briefReport").isString(),
   body("media").isArray(),
+  body("reverseGeocodingAddress").isString(),
   async (req, res) => {
-    const { type, typeDescription, geoLocation, briefReport, media } = req.body;
+    const {
+      type,
+      typeDescription,
+      geoLocation,
+      briefReport,
+      media,
+      reverseGeocodingAddress,
+    } = req.body;
     try {
       // validate data
       const errors = validationResult(req);
@@ -49,6 +57,7 @@ router.post(
           type: type,
           type_description: typeDescription,
           geo_location: geoLocation,
+          reverse_geocoding_address: reverseGeocodingAddress,
           brief_report: briefReport,
           media_urls: newValues,
         });

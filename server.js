@@ -43,6 +43,10 @@ app.use("/crime-report", require("./routes/crime-report/crimeReport"));
 // ngo routes
 app.use("/ngo/details/", require("./routes/ngo/ngoDetails"));
 app.use("/ngo/public/", require("./routes/ngo/ngoPublic"));
+app.use("/ngo/donation", require("./routes/ngo/ngoDonations"));
+
+// donation board
+app.use("/donation-board", require("./routes/donation-board/donationBoard"));
 //
 
 const PORT = process.env.PORT || 5000;

@@ -10,7 +10,9 @@ router.get("/profile-details", Auth.authenticateToken, async (req, res) => {
   try {
     // check user role before doing anything
     if (authData.role != Roles.GENERAL_USER)
-      throw Error("You are not authorized to this endpoint.");
+      res
+        .status(403)
+        .json({ message: "You are not authorized to this endpoint." });
 
     // fetch the users profile details
     const profileData = await GeneralUser.find({
@@ -36,7 +38,9 @@ router.patch(
     try {
       // check user role before doing anything
       if (authData.role != Roles.GENERAL_USER)
-        throw Error("You are not authorized to this endpoint.");
+        res
+          .status(403)
+          .json({ message: "You are not authorized to this endpoint." });
 
       // validate data
       const errors = validationResult(req);
