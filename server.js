@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json({ limit: "20mb" }));
 app.use(cors());
+
 const cookieParser = require("cookie-parser");
 require("./database/dbConnect").connect();
 require("./database/blobStore").config();
@@ -27,6 +28,19 @@ app.use("/", express.static("public"));
 //routes
 app.use("/auth/generaluser/", require("./routes/auth/generalUserAuth"));
 app.use("/auth/ngo/", require("./routes/auth/ngoAuth"));
+
+// general user routes
+app.use("/general-user", require("./routes/general-user/generalUser"));
+app.use(
+  "/general-user/report-homeless",
+  require("./routes/general-user/reportHomeless")
+);
+app.use("/general-user/donation", require("./routes/general-user/donation"));
+
+// crime report routes
+app.use("/crime-report", require("./routes/crime-report/crimeReport"));
+
+// ngo routes
 app.use("/ngo/details/", require("./routes/ngo/ngoDetails"));
 app.use("/ngo/public/", require("./routes/ngo/ngoPublic"));
 //

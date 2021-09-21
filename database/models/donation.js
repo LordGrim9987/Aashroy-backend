@@ -39,14 +39,13 @@ var donation = new Schema(
         },
       },
     ],
-    dimensions: [{ type: Number, required: true }],
+    dimensions: [{ type: String, required: true }], // length, width, height
     weight: {
-      type: Number,
-      required: true,
-    },
-    time_stamp: {
       type: String,
       required: true,
+    },
+    received_time_stamp: {
+      type: Date,
     },
   },
   { timestamps: true }

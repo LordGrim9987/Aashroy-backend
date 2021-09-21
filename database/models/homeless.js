@@ -16,7 +16,7 @@ var homeless = new Schema(
       required: true,
       ref: "general_user",
     },
-    media_urls: [
+    media_url: [
       {
         url: {
           type: String,

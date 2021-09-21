@@ -18,7 +18,8 @@ var general_user = new Schema({
     type: String,
   },
   contribution_points: {
-    type: Schema.Types.Mixed,
+    type: Number,
+    default: 0,
   },
 });
 
