@@ -2,6 +2,7 @@ const NGO = require("../../database/models/ngo");
 const { authenticateToken } = require("../../utils/Authorize");
 const { calculateDistance } = require("../../utils/location");
 const { nullUndefCheck } = require("../../utils/validate");
+const { body, validationResult } = require("express-validator");
 
 const router = require("express").Router();
 
@@ -34,6 +35,7 @@ router.post("/nearest", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
+    //@improvement: results can be cached and if a new request comes  with a small difference in location, then the cache could be used
     const ngos = await NGO.find({});
     const nearest = await ngoLocationWiseSearchAsync(
       ngos,
@@ -47,6 +49,48 @@ router.post("/nearest", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+router.post(
+  "/search",
+  body("searchQuery").isString().isLength({ min: 3 }),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { searchQuery, skip, limit } = req.body;
+    const puncMap = {
+      ".": true,
+      "*": true,
+      "?": true,
+      "/": true,
+      "@": true,
+      "(": true,
+      "-": true,
+      "&": true,
+      "%": true,
+      "\\": true,
+      ">": true,
+      "<": true,
+    };
+    let pattern = "";
+    searchQuery.split("").forEach((l) => {
+      if (!puncMap.hasOwnProperty(l)) {
+        pattern += l + ".*";
+      }
+    });
+    //cache can be used here
+    const ngos = await NGO.find({
+      $or: [
+        { name: { $regex: pattern, $options: "i" } },
+        { "geo_location.address": { $regex: pattern, $options: "i" } },
+      ],
+    }).sort({ _id: 1 });
+    // .skip(Number(skip))
+    // .limit(Number(limit));
+    return res.status(200).json({ ngos });
+  }
+);
 
 const MAX_DISTANCE = 10; //in km
 
@@ -80,6 +124,7 @@ const ngoLocationWiseSearchAsync = async (
     resolve(result);
   });
 };
+
 module.exports = router;
 
 // const locations = {
