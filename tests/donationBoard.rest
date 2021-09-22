@@ -1,4 +1,4 @@
-GET http://localhost:5000/donation-board
+GET http://localhost:5000/donation-board/0/10
 Content-Type: application/json
 
 ###
