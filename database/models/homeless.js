@@ -11,6 +11,10 @@ var homeless = new Schema(
       type: locationSchema,
       required: true,
     },
+    reverse_geocoding_address: {
+      type: String,
+      default: "",
+    },
     reported_by: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

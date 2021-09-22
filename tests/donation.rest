@@ -20,3 +20,9 @@ Content-Type: application/json
 GET http://localhost:5000/general-user/donation/ngo-details/61477e41e75f7f0edc352234
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 713d06c0c39ba0a625ef4b51e766debfee714c81b7d7103a1dddba321c9aa350455b9cf0213461f0286362e77ac5b63500b93090c6ec1042a620603b267f8950 
 Content-Type: application/json
+
+
+###
+GET http://localhost:5000/general-user/donation/my-donations/0/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 713d06c0c39ba0a625ef4b51e766debfee714c81b7d7103a1dddba321c9aa350455b9cf0213461f0286362e77ac5b63500b93090c6ec1042a620603b267f8950 
+Content-Type: application/json

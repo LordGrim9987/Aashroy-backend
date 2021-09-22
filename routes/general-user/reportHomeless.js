@@ -19,14 +19,18 @@ router.post(
   body("numberOfPeople").isNumeric(),
   body("geoLocation").isObject(),
   body("media").isArray(),
+  body("reverseGeocodingAddress").isString(),
   async (req, res) => {
     const authData = req.authData;
-    const { numberOfPeople, geoLocation, media } = req.body;
+    const { numberOfPeople, geoLocation, media, reverseGeocodingAddress } =
+      req.body;
 
     try {
       // check user role before doing anything
       if (authData.role != Roles.GENERAL_USER)
-        throw Error("You are not authorized to this endpoint.");
+        res
+          .status(403)
+          .json({ message: "You are not authorized to this endpoint." });
 
       // validate data
       const errors = validationResult(req);
@@ -57,6 +61,7 @@ router.post(
         const newRecord = new Homeless({
           number_of_people: numberOfPeople,
           geo_location: geoLocation,
+          reverse_geocoding_address: reverseGeocodingAddress,
           reported_by: authData.user_id,
           media_url: newValues,
         });
@@ -85,7 +90,9 @@ router.post(
     try {
       // check user role before doing anything
       if (authData.role != Roles.GENERAL_USER)
-        throw Error("You are not authorized to this endpoint.");
+        res
+          .status(403)
+          .json({ message: "You are not authorized to this endpoint." });
 
       // validate data
       const errors = validationResult(req);

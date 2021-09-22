@@ -27,7 +27,9 @@ router.post(
     try {
       // check user role before doing anything
       if (authData.role != Roles.GENERAL_USER)
-        throw Error("You are not authorized to this endpoint.");
+        res
+          .status(403)
+          .json({ message: "You are not authorized to this endpoint." });
 
       // validate data
       const errors = validationResult(req);
@@ -86,7 +88,9 @@ router.get("/ngo-details/:ngoId", Auth.authenticateToken, async (req, res) => {
   try {
     // check user role before doing anything
     if (authData.role != Roles.GENERAL_USER)
-      throw Error("You are not authorized to this endpoint.");
+      res
+        .status(403)
+        .json({ message: "You are not authorized to this endpoint." });
 
     // find the details and send back
     const ngoData = await NGO.find({ _id: ngoId }).select({
@@ -102,5 +106,33 @@ router.get("/ngo-details/:ngoId", Auth.authenticateToken, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// routes to get ones donations
+router.get(
+  "/my-donations/:skip/:limit",
+  Auth.authenticateToken,
+  async (req, res) => {
+    const skip = req.params.skip || 0;
+    const limit = req.params.limit || 10;
+    const authData = req.authData;
+    try {
+      // check user role before doing anything
+      if (authData.role != Roles.GENERAL_USER)
+        res
+          .status(403)
+          .json({ message: "You are not authorized to this endpoint." });
+
+      // retrieve data
+      const data = await Donation.find({ donor: authData.user_id })
+        .skip(skip)
+        .limit(limit);
+
+      res.status(200).json({ donations: data });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ message: err.message });
+    }
+  }
+);
 
 module.exports = router;

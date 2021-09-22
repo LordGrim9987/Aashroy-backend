@@ -1,0 +1,16 @@
+PATCH http://localhost:5000/ngo/donation/accept-donation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjE0OWFkOTI2ZTliMGM3ZWY5OTA0NDlhIiwicm9sZSI6Im5nbyIsImlhdCI6MTYzMjIxODUzNywiZXhwIjoxNjMyMzA0OTM3fQ.TI1fNipazPDshLKe0aWBjHzlEWY2nSL0rKaX-krw8OQ
+Content-Type: application/json
+
+{
+    "donationId":"614860ef664831a1a4b693bb"
+}
+
+###
+PATCH http://localhost:5000/ngo/donation/received-donation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjE0OWFkOTI2ZTliMGM3ZWY5OTA0NDlhIiwicm9sZSI6Im5nbyIsImlhdCI6MTYzMjIxODUzNywiZXhwIjoxNjMyMzA0OTM3fQ.TI1fNipazPDshLKe0aWBjHzlEWY2nSL0rKaX-krw8OQ
+Content-Type: application/json
+
+{
+    "donationId":"614860ef664831a1a4b693bb"
+}
