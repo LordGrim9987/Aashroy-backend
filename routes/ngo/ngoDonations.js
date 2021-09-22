@@ -20,9 +20,17 @@ router.get(
           .json({ message: "You are not authorized to this endpoint." });
 
       // retrieve data
-      const data = await Donation.find({ ngo: authData.user_id })
+      let data = await Donation.find({ ngo: authData.user_id })
+        .populate({ path: "donor", select: { _id: 0, profile_pic: 1 } })
         .skip(skip)
         .limit(limit);
+
+      // map and remove the anonymous data's profile_pic
+      data = JSON.parse(JSON.stringify(data));
+      data.map((item) => {
+        if (item.donor_name === "Anonymous") item.donor.profile_pic = "";
+        return item;
+      });
 
       res.status(200).json({ donations: data });
     } catch (err) {
