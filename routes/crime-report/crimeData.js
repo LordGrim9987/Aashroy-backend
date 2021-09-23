@@ -12,9 +12,13 @@ router.post("/get/locationwise", authenticateToken, async (req, res) => {
   if (req.authData.role != Roles.NGO) {
     return res.sendStatus(403);
   }
-  const { geo_location, diameter } = req.body;
+  const { geo_location, diameter, days } = req.body;
   try {
-    const crime = await CRIME_REPORTS.find({});
+    const crime = await CRIME_REPORTS.find({
+      date: {
+        $gte: new Date(new Date().getTime() - days * 24 * 60 * 60 * 1000),
+      },
+    });
     const crime_list = await CrimeLocationWiseSearchAsync(
       crime,
       geo_location.latitude,
@@ -41,9 +45,13 @@ router.post("/get/addresswise", authenticateToken, async (req, res) => {
   if (req.authData.role != Roles.NGO) {
     return res.sendStatus(403);
   }
-  const { address, diameter } = req.body;
+  const { address, diameter, days } = req.body;
   try {
-    const crimes = await CRIME_REPORTS.find({});
+    const crimes = await CRIME_REPORTS.find({
+      date: {
+        $gte: new Date(new Date().getTime() - days * 24 * 60 * 60 * 1000),
+      },
+    });
     const { latitude, longitude } = await getCoordsFromAddressAsync(address);
     if (latitude == -1) return res.sendStatus(404);
 
