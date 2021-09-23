@@ -50,6 +50,7 @@ app.use("/donation-board", require("./routes/donation-board/donationBoard"));
 //
 
 app.use("/homeless/data/", require("./routes/homeless/homeless"));
+app.use("/crime/data/", require("./routes/crime-report/crimeData"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Server is running at port", PORT));
