@@ -21,6 +21,10 @@ var crime_reports = new Schema(
     brief_report: {
       type: String,
     },
+    date: {
+      type: Number,
+      default: Date.now(),
+    },
     media_urls: [
       {
         url: {
