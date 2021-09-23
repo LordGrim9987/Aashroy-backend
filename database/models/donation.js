@@ -4,7 +4,7 @@ var donation = new Schema(
   {
     donor: {
       type: Schema.Types.ObjectId,
-      ref: "general_users",
+      ref: "general_user",
     },
     donor_name: {
       type: String,

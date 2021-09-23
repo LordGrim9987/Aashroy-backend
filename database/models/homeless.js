@@ -20,6 +20,10 @@ var homeless = new Schema(
       required: true,
       ref: "general_user",
     },
+    date: {
+      type: Number,
+      default: Date.now(),
+    },
     media_url: [
       {
         url: {

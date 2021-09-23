@@ -27,6 +27,23 @@ router.get("/profile-details", Auth.authenticateToken, async (req, res) => {
   }
 });
 
+// route to provide data for public profile
+router.get("/profile-details/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    // fetch the users profile details
+    const profileData = await GeneralUser.find({
+      _id: id,
+    }).select({ _id: 0, email: 0 });
+
+    // send back the response
+    res.status(200).send(profileData);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // route to update data for general user profile
 router.patch(
   "/profile-details",
