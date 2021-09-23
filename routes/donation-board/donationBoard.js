@@ -17,7 +17,7 @@ router.get("/:skip/:limit", async (req, res) => {
       .populate({ path: "ngo", select: { name: 1 } })
       .populate({
         path: "donor",
-        select: { _id: 0, profile_pic: 1 },
+        select: { profile_pic: 1 },
       })
       .skip(skip)
       .limit(limit);

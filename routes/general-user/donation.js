@@ -124,6 +124,8 @@ router.get(
 
       // retrieve data
       const data = await Donation.find({ donor: authData.user_id })
+        .populate({ path: "ngo", select: { name: 1 } })
+        .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit);
 

@@ -21,14 +21,17 @@ router.get(
 
       // retrieve data
       let data = await Donation.find({ ngo: authData.user_id })
-        .populate({ path: "donor", select: { _id: 0, profile_pic: 1 } })
+        .populate({ path: "donor", select: { profile_pic: 1 } })
         .skip(skip)
         .limit(limit);
 
       // map and remove the anonymous data's profile_pic
       data = JSON.parse(JSON.stringify(data));
       data.map((item) => {
-        if (item.donor_name === "Anonymous") item.donor.profile_pic = "";
+        if (item.donor_name === "Anonymous") {
+          item.donor.profile_pic = "";
+          item.donor._id = "";
+        }
         return item;
       });
 

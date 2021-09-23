@@ -3,6 +3,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 713d06c0c39ba0a625ef4
 Content-Type: application/json
 
 ###
+GET http://localhost:5000/general-user/profile-details/6141920d11ebba4ac0f33fd7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 713d06c0c39ba0a625ef4b51e766debfee714c81b7d7103a1dddba321c9aa350455b9cf0213461f0286362e77ac5b63500b93090c6ec1042a620603b267f8950 
+Content-Type: application/json
+
+
+###
 PATCH  http://localhost:5000/general-user/profile-details
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9 713d06c0c39ba0a625ef4b51e766debfee714c81b7d7103a1dddba321c9aa350455b9cf0213461f0286362e77ac5b63500b93090c6ec1042a620603b267f8950 
 Content-Type: application/json
