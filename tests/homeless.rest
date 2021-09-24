@@ -1,6 +1,9 @@
-POST http://localhost:5000/auth/generaluser/test
+POST http://localhost:5000/homeless/data/get/person
 Content-Type: application/json     
 
 {
-    ""
+
 }
+
+###
+GET http://localhost:5000/homeless/data/

@@ -81,16 +81,37 @@ router.post("/get/addresswise", authenticateToken, async (req, res) => {
   }
 });
 
-router.post("/get/personwise", authenticateToken, async (req, res) => {
+// router.post("/get/personwise", authenticateToken, async (req, res) => {
+//   if (req.authData.role != Roles.NGO) {
+//     return res.sendStatus(403);
+//   }
+//   try {
+//     const { person, diameter } = req.body;
+//     const homeless_person = await HOMELESS_PERSON.find({
+//       person_name: person,
+//     }).populate("homeless", "geo_location");
+//     res.status(200).json({ homeless_person });
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// });
+
+// router.post("/get/person", (req, res) => {
+//   res.send("work");
+// });
+
+router.post("/get/person", authenticateToken, async (req, res) => {
   if (req.authData.role != Roles.NGO) {
     return res.sendStatus(403);
   }
   try {
-    const { person, diameter } = req.body;
-    const homeless_person = await HOMELESS_PERSON.find({
-      person_name: person,
-    }).populate("homeless", "geo_location");
-    res.status(200).json({ homeless_person });
+    const { _id } = req.body;
+    const homeless_person = await HOMELESS_PERSON.find({ homeless: _id });
+    console.log(homeless_person, "yooooo");
+    res
+      .status(200)
+      .json({ homeless_person, notfound: homeless_person == null });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
