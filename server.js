@@ -30,31 +30,37 @@ app.use(
 app.use("/", express.static("public"));
 
 //routes
-app.use("/auth/generaluser/", require("./routes/auth/generalUserAuth"));
-app.use("/auth/ngo/", require("./routes/auth/ngoAuth"));
+app.use("/api/auth/generaluser/", require("./routes/auth/generalUserAuth"));
+app.use("/api/auth/ngo/", require("./routes/auth/ngoAuth"));
 
 // general user routes
-app.use("/general-user", require("./routes/general-user/generalUser"));
+app.use("/api/general-user", require("./routes/general-user/generalUser"));
 app.use(
-  "/general-user/report-homeless",
+  "/api/general-user/report-homeless",
   require("./routes/general-user/reportHomeless")
 );
-app.use("/general-user/donation", require("./routes/general-user/donation"));
+app.use(
+  "/api/general-user/donation",
+  require("./routes/general-user/donation")
+);
 
 // crime report routes
-app.use("/crime-report", require("./routes/crime-report/crimeReport"));
+app.use("/api/crime-report", require("./routes/crime-report/crimeReport"));
 
 // ngo routes
-app.use("/ngo/details/", require("./routes/ngo/ngoDetails"));
-app.use("/ngo/public/", require("./routes/ngo/ngoPublic"));
-app.use("/ngo/donation", require("./routes/ngo/ngoDonations"));
+app.use("/api/ngo/details/", require("./routes/ngo/ngoDetails"));
+app.use("/api/ngo/public/", require("./routes/ngo/ngoPublic"));
+app.use("/api/ngo/donation", require("./routes/ngo/ngoDonations"));
 
 // donation board
-app.use("/donation-board", require("./routes/donation-board/donationBoard"));
+app.use(
+  "/api/donation-board",
+  require("./routes/donation-board/donationBoard")
+);
 //
 
-app.use("/homeless/data/", require("./routes/homeless/homeless"));
-app.use("/crime/data/", require("./routes/crime-report/crimeData"));
+app.use("/api/homeless/data/", require("./routes/homeless/homeless"));
+app.use("/api/crime/data/", require("./routes/crime-report/crimeData"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(">> Server is running at port", PORT));
