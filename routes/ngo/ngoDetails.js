@@ -44,6 +44,7 @@ router.post("/getdata", authenticateToken, async (req, res) => {
       return res.sendStatus(404);
     }
     // console.log(ngo, ">>>oi");
+    // ngo.media_urls = ngo.media_urls.reverse();
     return res.status(200).json({ ngo });
   } catch (error) {
     res.sendStatus(500);
@@ -115,9 +116,12 @@ router.post("/addnewphoto", authenticateToken, async (req, res) => {
     });
     const ngo = await NGO.findById({ _id: user_id });
     if (!ngo) return res.sendStatus(404);
-    ngo.media_urls.push({ url: secure_url, media_type: "image" });
+    ngo.media_urls = [
+      { url: secure_url, media_type: "image" },
+      ...ngo.media_urls,
+    ];
     const newNgo = await ngo.save();
-    res.status(200).json({ newMediaList: newNgo.media_urls.reverse() });
+    res.status(200).json({ newMediaList: newNgo.media_urls });
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
