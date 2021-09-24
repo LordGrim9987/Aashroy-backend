@@ -3,6 +3,7 @@ const Donation = require("../../database/models/donation");
 const NGO = require("../../database/models/ngo");
 const Auth = require("../../utils/Authorize");
 const Roles = require("../../database/roles");
+const GeneralUser = require("../../database/models/general_user");
 
 // routes to get ngo's donations
 router.get(
@@ -90,6 +91,13 @@ router.patch("/received-donation", Auth.authenticateToken, async (req, res) => {
           is_donation_received: true,
         },
       }
+    );
+
+    // before that increase the contribution points
+    let userId = await Donation.find({ _id: donationId });
+    await GeneralUser.findOneAndUpdate(
+      { _id: userId[0].donor },
+      { $inc: { contribution_points: 20 } }
     );
 
     res.sendStatus(200);

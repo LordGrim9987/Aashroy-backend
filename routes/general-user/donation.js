@@ -70,6 +70,7 @@ router.post(
         });
 
         const savedRecord = await newRecord.save();
+
         // return successful
         res.sendStatus(200);
       });

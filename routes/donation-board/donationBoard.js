@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Donation = require("../../database/models/donation");
+const GeneralUser = require("../../database/models/general_user");
 
 // route to bring latest donations
 router.get("/:skip/:limit", async (req, res) => {
@@ -21,6 +22,24 @@ router.get("/:skip/:limit", async (req, res) => {
       })
       .skip(skip)
       .limit(limit);
+
+    res.status(200).json({ donations: data });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// route to bring top 10 contributors
+router.get("/top-contributors", async (req, res) => {
+  try {
+    // retrieve data and send it back
+    const data = await GeneralUser.find()
+      .sort({
+        contribution_points: 1,
+      })
+      .select({ email: 0, updatedAt: 0 })
+      .limit(10);
 
     res.status(200).json({ donations: data });
   } catch (err) {

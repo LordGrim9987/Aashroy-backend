@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Homeless = require("../../database/models/homeless");
 const HomelessPerson = require("../../database/models/homeless_person");
+const GeneralUser = require("../../database/models/general_user");
 const Auth = require("../../utils/Authorize");
 const Roles = require("../../database/roles");
 const { body, validationResult } = require("express-validator");
@@ -67,6 +68,13 @@ router.post(
         });
 
         const savedRecord = await newRecord.save();
+
+        // before that increase the contribution points
+        await GeneralUser.findOneAndUpdate(
+          { _id: authData.user_id },
+          { $inc: { contribution_points: 5 } }
+        );
+
         // and return the generated _id in response
         res.status(200).json({ recordId: savedRecord._id });
       });
@@ -138,6 +146,13 @@ router.post(
         });
         // store the data along with photo url and parent id
         let savedResults = await HomelessPerson.insertMany(newData);
+
+        // before that increase the contribution points
+        await GeneralUser.findOneAndUpdate(
+          { _id: authData.user_id },
+          { $inc: { contribution_points: 10 } }
+        );
+
         res.sendStatus(200);
       });
 
