@@ -32,7 +32,6 @@ router.post("/get/locationwise", authenticateToken, async (req, res) => {
     }
 
     const homelessMap = groupSimilarLocations(homeless_list);
-    console.log(homelessMap);
 
     res.status(200).json({ homeless_list, topImages, homelessMap });
   } catch (error) {
@@ -74,7 +73,6 @@ router.post("/get/addresswise", authenticateToken, async (req, res) => {
     shuffle(topImages);
     if (homeless_list.length == 0) {
       msg = "No results found";
-      console.log("nope");
     }
     res.status(200).json({ homeless_list, msg, topImages, homelessMap });
   } catch (error) {

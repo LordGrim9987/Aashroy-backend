@@ -61,7 +61,6 @@ router.post("/get/addresswise", authenticateToken, async (req, res) => {
       longitude,
       diameter
     );
-    console.log(crimes);
     const crimeMap = groupSimilarLocations(crime_list);
 
     let topImages = getTopImages(crime_list, address);

@@ -43,8 +43,6 @@ router.post("/getdata", authenticateToken, async (req, res) => {
     if (!ngo) {
       return res.sendStatus(404);
     }
-    // console.log(ngo, ">>>oi");
-    // ngo.media_urls = ngo.media_urls.reverse();
     return res.status(200).json({ ngo });
   } catch (error) {
     res.sendStatus(500);
@@ -75,7 +73,7 @@ router.post("/addmember", authenticateToken, async (req, res) => {
     const newNgo = await ngo.save();
     return res.status(200).json({ members: newNgo.members });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
@@ -90,7 +88,6 @@ router.post("/deletemember", authenticateToken, async (req, res) => {
   try {
     const ngo = await NGO.findById({ _id: user_id });
     if (!ngo) {
-      console.log(ngo);
       return res.sendStatus(404);
     }
     ngo.members = ngo.members.filter((m) => m._id != _id);
@@ -98,7 +95,7 @@ router.post("/deletemember", authenticateToken, async (req, res) => {
 
     return res.status(200).json({ members: newNgo.members });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
@@ -123,7 +120,7 @@ router.post("/addnewphoto", authenticateToken, async (req, res) => {
     const newNgo = await ngo.save();
     res.status(200).json({ newMediaList: newNgo.media_urls });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.sendStatus(500);
   }
 });

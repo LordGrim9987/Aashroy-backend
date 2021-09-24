@@ -10,9 +10,9 @@ async function DBConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Database connected successfully");
+    console.log(">> Database connected successfully");
   } catch (err) {
-    console.log("Unable to connect to Database. Retrying...");
+    console.log(">> Unable to connect to Database. Retrying...");
     NUM_RETRIES--;
     DBConnect();
   }

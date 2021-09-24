@@ -10,13 +10,6 @@ var ngo = new Schema({
       ref: "donation",
     },
   ],
-  ngo_work_details: [
-    {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "ngo_work_detail",
-    },
-  ],
   name: {
     type: String,
     required: true,

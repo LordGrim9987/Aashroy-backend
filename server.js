@@ -1,9 +1,13 @@
 require("dotenv").config();
 
 const express = require("express");
+const morgan = require("morgan");
 const cors = require("cors"); //for development use only
 
 const app = express();
+
+// for logs
+app.use(morgan("combined"));
 
 app.use(express.json({ limit: "20mb" }));
 app.use(cors());
@@ -53,4 +57,4 @@ app.use("/homeless/data/", require("./routes/homeless/homeless"));
 app.use("/crime/data/", require("./routes/crime-report/crimeData"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Server is running at port", PORT));
+app.listen(PORT, () => console.log(">> Server is running at port", PORT));

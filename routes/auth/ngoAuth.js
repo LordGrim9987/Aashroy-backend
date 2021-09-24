@@ -11,7 +11,6 @@ const { generateHashAsync, compareWithHashAsync } = require("../../utils/hash");
 router.post("/register", async (req, res) => {
   const { name, email, phone, about, location, password, website } = req.body;
   if (!nullUndefCheck({ name, email, phone, about, location })) {
-    console.log("yooo");
     return res.sendStatus(403);
   }
   try {
@@ -25,10 +24,9 @@ router.post("/register", async (req, res) => {
       geo_location: location,
       website: website || "",
     });
-    console.log(ngo);
     res.status(200).json({ success: true, msg: "Registered Successfully" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
@@ -65,7 +63,7 @@ router.post("/signin", async (req, res) => {
 
     return res.status(200).json({ access_token, ngoData: ngo, refresh_token });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
@@ -77,7 +75,7 @@ router.post("/signout", async (req, res) => {
     await SESSIONS.deleteMany({ refresh_token });
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });

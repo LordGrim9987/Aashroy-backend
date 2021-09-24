@@ -17,7 +17,7 @@ router.get("/get/:id", async (req, res) => {
     }
     res.status(200).json({ ngo });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
@@ -31,7 +31,6 @@ router.get("/all", async (req, res) => {
 router.post("/nearest", async (req, res) => {
   const { diameter, geo_location } = req.body;
   if (!nullUndefCheck({ diameter: diameter, geo_location: geo_location })) {
-    console.log(geo_location);
     return res.sendStatus(400);
   }
   try {
@@ -45,7 +44,7 @@ router.post("/nearest", async (req, res) => {
     );
     res.status(200).json({ ngos: nearest });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   }
 });
