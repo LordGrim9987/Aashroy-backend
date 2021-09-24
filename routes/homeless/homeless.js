@@ -132,8 +132,12 @@ const getCoordsFromAddressAsync = async (address) => {
    * returns the latitude, longitude of estimated an address by searching it form database
    * Third Party Services like: Google maps api can be used directly in future
    */
+  let pattern = address;
   const homeless = await HOMELESS.find({
-    "geo_location.address": address,
+    $or: [
+      { "geo_location.address": address },
+      { reverse_geocoding_address: { $regex: pattern, $options: "i" } },
+    ],
   });
   let lats = 0,
     longs = 0;

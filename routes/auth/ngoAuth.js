@@ -74,7 +74,7 @@ router.post("/signout", async (req, res) => {
   //delete the refresh token
   try {
     const { refresh_token } = req.body;
-    await SESSIONS.deleteOne({ refresh_token });
+    await SESSIONS.deleteMany({ refresh_token });
     res.status(200).json({ success: true });
   } catch (error) {
     console.log(error);
