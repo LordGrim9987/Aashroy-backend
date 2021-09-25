@@ -41,7 +41,7 @@ Start the development server
 
 ## Environment variables
 
-To quickly edit the site, you can change the constants.
+To run this project, you will need to add the following environment variables to your .env file
 
 `MONGODB_URL` [see docs](https://docs.mongodb.com/manual/reference/connection-string/)
 
