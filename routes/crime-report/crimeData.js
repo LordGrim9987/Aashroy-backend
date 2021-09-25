@@ -19,12 +19,15 @@ router.post("/get/locationwise", authenticateToken, async (req, res) => {
         $gte: new Date(new Date().getTime() - days * 24 * 60 * 60 * 1000),
       },
     });
+    console.log(crime.length);
+
     const crime_list = await CrimeLocationWiseSearchAsync(
       crime,
       geo_location.latitude,
       geo_location.longitude,
       diameter
     );
+    console.log(crime_list.length);
     let topImages = getRandomImagesFromCrimeList(crime_list);
     if (topImages.length == 0) {
       topImages = [

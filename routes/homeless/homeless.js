@@ -27,7 +27,7 @@ router.post("/get/locationwise", authenticateToken, async (req, res) => {
     let topImages = getRandomImagesFromHomelessList(homeless_list);
     if (topImages.length == 0) {
       topImages = [
-        "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png",
+        { url: "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png" },
       ];
     }
 
@@ -67,7 +67,7 @@ router.post("/get/addresswise", authenticateToken, async (req, res) => {
     let msg = "People near " + address;
     if (topImages.length == 0) {
       topImages = [
-        "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png",
+        { url: "https://maps.gstatic.com/tactile/pane/default_geocode-2x.png" },
       ];
     }
     shuffle(topImages);
