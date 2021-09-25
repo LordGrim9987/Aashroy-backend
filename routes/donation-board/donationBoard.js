@@ -13,7 +13,7 @@ router.get("/:skip/:limit", async (req, res) => {
       donor_name: { $ne: "Anonymous" },
       is_donation_received: true,
     })
-      .sort({ createdAt: "asc" })
+      .sort({ createdAt: "desc" })
       .select({ donor_name: 1, type: 1, media_urls: 1 })
       .populate({ path: "ngo", select: { name: 1 } })
       .populate({

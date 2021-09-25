@@ -1,23 +1,18 @@
+![Logo](https://res.cloudinary.com/rupamcloud/image/upload/v1632588318/logo512_vkauoz.png)
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-    
 # Aashroy
 
 Mapping the homless and helping them
 
-
-## Tech Stack
+## Backend Tech Stack
 
 **Server:** Express, MongoDB
 
-  
 ## Third party services
 
 - Google Oauth for authentication
 - Cloudinary as a media storage
 
-  
 ## Run Locally / Development Setup
 
 Go to the project directory
@@ -43,26 +38,28 @@ Start the development server
 ```bash
   npm run devStart
 ```
-  
+
 ## Environment variables
 
-To quickly edit the site, you can change the constants.
+To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
+`MONGODB_URL` [see docs](https://docs.mongodb.com/manual/reference/connection-string/)
 
-`ANOTHER_API_KEY`
+`CLOUDINARY_SECRET_KEY` [see docs](https://cloudinary.com/documentation/how_to_integrate_cloudinary)
 
-  
+`CLOUDINARY_KEY` [see docs](https://cloudinary.com/documentation/how_to_integrate_cloudinary)
+
+`ACCESS_TOKEN_SECRET` [see docs](https://www.npmjs.com/package/jsonwebtoken)
+
+`BCRYPT_SALTROUNDS` [see docs](https://www.npmjs.com/package/bcrypt)
+
 ## To serve the frontend
 
 Move the contents in `build` folder of `frontend` to `public` folder of the backend after successfully building the frontend for production.
 
-  
 ## Contributors
 
 - [Debashish Gogoi](https://github.com/Devzard)
 - [Forheen Ahmed](https://github.com/Forheen)
 - [Rishparn Gogoi](https://github.com/RG-404)
 - [Rupam Jyoti Das](https://github.com/rupam2001)
-
-  
