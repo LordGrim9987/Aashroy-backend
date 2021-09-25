@@ -1,8 +1,8 @@
-GET http://localhost:5000/donation-board/0/10
+GET http://localhost:5000/api/donation-board/0/10
 Content-Type: application/json
 
 ###
-GET http://localhost:5000/donation-board/top-contributors
+GET http://localhost:5000/api/donation-board/top-contributors
 Content-Type: application/json
 
 
