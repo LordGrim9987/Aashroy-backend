@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors"); //for development use only
+const path = require("path");
 
 const app = express();
 
@@ -27,7 +28,7 @@ app.use(
   })
 );
 
-app.use("/", express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 //routes
 app.use("/api/auth/generaluser/", require("./routes/auth/generalUserAuth"));
@@ -61,6 +62,10 @@ app.use(
 
 app.use("/api/homeless/data/", require("./routes/homeless/homeless"));
 app.use("/api/crime/data/", require("./routes/crime-report/crimeData"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(">> Server is running at port", PORT));
