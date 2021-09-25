@@ -18,6 +18,7 @@ require("./database/dbConnect").connect();
 require("./database/blobStore").config();
 
 app.use(cookieParser());
+// used to apped new access_token if the previous one expires
 const mung = require("express-mung");
 app.use(
   mung.json(function authTransforms(body, req, res) {
