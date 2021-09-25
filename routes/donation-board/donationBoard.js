@@ -13,7 +13,11 @@ router.get("/:skip/:limit", async (req, res) => {
       donor_name: { $ne: "Anonymous" },
       is_donation_received: true,
     })
+<<<<<<< HEAD
       .sort({ createdAt: "desc" })
+=======
+      .sort({ createdAt: "asc" })
+>>>>>>> donation
       .select({ donor_name: 1, type: 1, media_urls: 1 })
       .populate({ path: "ngo", select: { name: 1 } })
       .populate({
@@ -36,7 +40,11 @@ router.get("/top-contributors", async (req, res) => {
     // retrieve data and send it back
     const data = await GeneralUser.find()
       .sort({
+<<<<<<< HEAD
         contribution_points: "desc",
+=======
+        contribution_points: "descending",
+>>>>>>> donation
       })
       .select({ email: 0, updatedAt: 0 })
       .limit(10);
