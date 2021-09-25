@@ -9,8 +9,6 @@ const { uploadImageAsync } = require("../../database/blobStore");
 
 const UPLOAD_PATH = "/homeless-report";
 const UPLOAD_PATH_ADD_INFO = "/homeless-report-add-info";
-const IMAGE_PUBLIC_ID = "homeless";
-const IMAGE_PUBLIC_ID_ADD_INFO = "homeless-person";
 
 // route to report homeless people
 // example request at reportHomeless.rest
@@ -48,7 +46,6 @@ router.post(
         let result = await uploadImageAsync({
           upload_path: UPLOAD_PATH,
           file: item,
-          public_id: IMAGE_PUBLIC_ID,
         });
         return result.url;
       });
@@ -119,7 +116,6 @@ router.post(
           let result = await uploadImageAsync({
             upload_path: UPLOAD_PATH_ADD_INFO,
             file: person.photo[0],
-            public_id: IMAGE_PUBLIC_ID_ADD_INFO,
           });
           return result.url;
         } else {

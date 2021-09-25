@@ -7,7 +7,6 @@ const { body, validationResult } = require("express-validator");
 const { uploadImageAsync } = require("../../database/blobStore");
 
 const UPLOAD_PATH_DONATION = "/donations";
-const IMAGE_PUBLIC_ID_DONATION = "donations";
 
 // route to create new donations
 router.post(
@@ -46,7 +45,6 @@ router.post(
         let result = await uploadImageAsync({
           upload_path: UPLOAD_PATH_DONATION,
           file: item,
-          public_id: IMAGE_PUBLIC_ID_DONATION,
         });
         return result.url;
       });

@@ -23,6 +23,7 @@ router.get(
       // retrieve data
       let data = await Donation.find({ ngo: authData.user_id })
         .populate({ path: "donor", select: { profile_pic: 1 } })
+        .sort({ createdAt: "desc" })
         .skip(skip)
         .limit(limit);
 

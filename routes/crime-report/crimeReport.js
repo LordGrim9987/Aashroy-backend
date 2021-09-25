@@ -6,7 +6,6 @@ const { body, validationResult } = require("express-validator");
 const { uploadImageAsync } = require("../../database/blobStore");
 
 const UPLOAD_PATH_CRIME_REPORT = "/crime-report";
-const IMAGE_PUBLIC_ID_CRIME_REPORT = "crime-report";
 
 // route to save crime report data to server
 router.post(
@@ -41,7 +40,6 @@ router.post(
         let result = await uploadImageAsync({
           upload_path: UPLOAD_PATH_CRIME_REPORT,
           file: item,
-          public_id: IMAGE_PUBLIC_ID_CRIME_REPORT,
         });
         return result.url;
       });
