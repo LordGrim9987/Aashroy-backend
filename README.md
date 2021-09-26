@@ -53,6 +53,10 @@ To run this project, you will need to add the following environment variables to
 
 `BCRYPT_SALTROUNDS` [see docs](https://www.npmjs.com/package/bcrypt)
 
+## Constants
+
+[`OAuth2ClientEndPoint`](routes/auth/generalUserAuth.js) [see docs](https://developers.google.com/identity/protocols/oauth2)
+
 ## To serve the frontend
 
 Move the contents in `build` folder of `frontend` to `public` folder of the backend after successfully building the frontend for production.
