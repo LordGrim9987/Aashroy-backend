@@ -90,6 +90,7 @@ router.patch("/received-donation", Auth.authenticateToken, async (req, res) => {
       {
         $set: {
           is_donation_received: true,
+          received_time_stamp: Date.now(),
         },
       }
     );
