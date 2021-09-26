@@ -34,7 +34,7 @@ router.get("/:skip/:limit", async (req, res) => {
 router.get("/top-contributors", async (req, res) => {
   try {
     // retrieve data and send it back
-    const data = await GeneralUser.find()
+    const data = await GeneralUser.find({ contribution_points: { $gt: 0 } })
       .sort({
         contribution_points: "desc",
       })
