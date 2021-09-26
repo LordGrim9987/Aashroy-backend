@@ -13,7 +13,7 @@ router.get("/:skip/:limit", async (req, res) => {
       donor_name: { $ne: "Anonymous" },
       is_donation_received: true,
     })
-      .sort({ updatedAt: "desc" })
+      .sort({ received_time_stamp: "desc" })
       .select({ donor_name: 1, type: 1, media_urls: 1 })
       .populate({ path: "ngo", select: { name: 1 } })
       .populate({
@@ -34,7 +34,7 @@ router.get("/:skip/:limit", async (req, res) => {
 router.get("/top-contributors", async (req, res) => {
   try {
     // retrieve data and send it back
-    const data = await GeneralUser.find()
+    const data = await GeneralUser.find({ contribution_points: { $gt: 0 } })
       .sort({
         contribution_points: "desc",
       })
